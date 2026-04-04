@@ -1,16 +1,62 @@
-# 📦 Sistema de Gestão de Produtos e Fornecedores (Java Swing Prototype)
+# 📦 Sistema Comércio POO - Trabalho P1
 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![Swing](https://img.shields.io/badge/Swing-GUI-007396?style=for-the-badge&logo=java&logoColor=white)
-![NetBeans](https://img.shields.io/badge/NetBeans-8.2-1B6AC6?style=for-the-badge&logo=apache-netbeans&logoColor=white)
+![Swing](https://img.shields.io/badge/Swing-007396?style=for-the-badge&logo=java&logoColor=white)
+![NetBeans](https://img.shields.io/badge/NetBeans-1B6AC6?style=for-the-badge&logo=apache-netbeans&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Em_Desenvolvimento-yellow?style=for-the-badge)
 
-Um protótipo de aplicação desktop para cadastro de produtos e fornecedores. O foco central deste projeto não é atuar como uma solução de produção, mas sim servir como um laboratório prático para o gerenciamento de estado em memória e a manipulação de eventos assíncronos via AWT/Swing.
+Este projeto é o **Trabalho de POO - P1**, desenvolvido para a disciplina de Programação Orientada a Objetos. O objetivo principal é a criação de um sistema comercial robusto que consolida o uso de classes, objetos e interfaces gráficas com Java.
 
 ---
 
-## 🚀 Dinâmica de Funcionalidades
+## 🎯 Requisitos do Trabalho
 
-- **Alocação Dinâmica:** Instanciação de objetos `Produto` e `Fornecedor` sob demanda gerenciados dinamicamente.
-- **Data Binding Reativo:** Atualização bidirecional entre a estrutura de dados e os componentes gráficos (caixas de combinação preenchendo campos de texto) orientada pelo evento `itemStateChanged`.
-- **Sanitização de Input Visual:** Uso da classe `JFormattedTextField` em conjunto com `formatterFactory` para forçar máscaras de validação rígidas para CNPJ (`##.###.###/####-##`) e Telefones (`(##) #####-####`).
-- **Reflexão Polimórfica:** Sobrescrita (`@Override`) do método `.toString()` nas classes de entidade,
+Conforme as diretrizes da P1, o sistema contempla o processamento consistente de quatro entidades fundamentais, permitindo operações completas de:
+- **🔍 Consulta**: Visualização de registros existentes.
+- **➕ Inserção**: Adição de novos dados ao sistema.
+- **📝 Alteração**: Edição de informações já cadastradas.
+
+---
+
+## 🚀 Entidades Gerenciadas
+
+- **👤 Cadastro de Usuários**: Gestão de operadores do sistema.
+- **👥 Cadastro de Clientes**: Controle de dados de contato e identificação de clientes.
+- **⚙️ Gestão de Produtos**: Controle de itens, preços e estoque.
+- **🏢 Gestão de Fornecedores**: Registro e vinculação de parceiros comerciais.
+
+---
+
+## 🛠️ Tecnologias e Componentes
+
+O desenvolvimento é focado em Java Desktop Nativo, seguindo os requisitos acadêmicos:
+- **GUI**: Utilização estrita de **Java AWT** e **SWING** para a construção das interfaces.
+- **Lógica**: Implementação de encapsulamento e processamento de listas para persistência em memória.
+- **Ambiente**: Desenvolvido como um projeto **NetBeans**, garantindo compatibilidade para a entrega.
+
+---
+
+## 📂 Estrutura de Navegação
+
+```mermaid
+graph TD
+  A[Tela Principal] --> B[Módulo de Clientes]
+  A --> C[Módulo de Fornecedores]
+  A --> D[Módulo de Usuários]
+  A --> E[Gestão de Produtos]
+  B -->|CRUD| B
+  C -->|CRUD| C
+  D -->|CRUD| D
+  E -->|CRUD| E
+```
+
+---
+
+## 💻 Como Executar
+
+1. Importe o projeto no **Apache NetBeans**.
+2. Certifique-se de que o JDK está configurado corretamente.
+3. Execute a classe `Projeto.java` (pacote `projeto`) para iniciar a aplicação.
+
+---
+Desenvolvido como parte avaliativa da nota P1.
