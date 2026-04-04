@@ -1,6 +1,7 @@
 package telas;
 
 import entidades.Usuario;
+import java.awt.event.ItemEvent;
 import java.util.LinkedList;
 
 /**
@@ -42,9 +43,11 @@ public class CadastroUsuarios extends javax.swing.JFrame {
         btNovo = new javax.swing.JButton();
         btSalvar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Usuários");
+
+        comboUsuarios.addItemListener(this::comboUsuariosItemStateChanged);
 
         jLabel2.setText("Nome");
 
@@ -144,6 +147,23 @@ public class CadastroUsuarios extends javax.swing.JFrame {
 
         btNovo.setEnabled(true);
     }//GEN-LAST:event_btSalvarActionPerformed
+
+    private void comboUsuariosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboUsuariosItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            Usuario usuario = (Usuario) comboUsuarios
+                    .getSelectedItem();
+            
+            username.setText(usuario.getUsername());
+            senha.setText(usuario.getSenha());
+            email.setText(usuario.getEmail());
+            nivel.setText(usuario.getNivel());
+            
+            btSalvar.setEnabled(true);
+            btNovo.setEnabled(true);
+            
+            novo = false;
+       }
+    }//GEN-LAST:event_comboUsuariosItemStateChanged
 
     /**
      * @param args the command line arguments
