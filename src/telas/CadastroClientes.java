@@ -45,7 +45,7 @@ public class CadastroClientes extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         nome = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         clientesComboBox.addItemListener(this::clientesComboBoxItemStateChanged);
         clientesComboBox.addActionListener(this::clientesComboBoxActionPerformed);
