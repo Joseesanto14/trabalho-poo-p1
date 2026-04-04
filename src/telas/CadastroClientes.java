@@ -1,7 +1,8 @@
 package telas;
 
-import entidades.Fornecedor;
 import java.util.LinkedList;
+import entidades.Cliente;
+import java.awt.event.ItemEvent;
 
 /**
  *
@@ -29,13 +30,13 @@ public class CadastroClientes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        clientesComboBox = new javax.swing.JComboBox<>();
+        clientesComboBox = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        cnpj = new javax.swing.JFormattedTextField();
+        cpf = new javax.swing.JFormattedTextField();
         telefone = new javax.swing.JFormattedTextField();
         email = new javax.swing.JTextField();
         endereco = new javax.swing.JTextField();
@@ -46,6 +47,7 @@ public class CadastroClientes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        clientesComboBox.addItemListener(this::clientesComboBoxItemStateChanged);
         clientesComboBox.addActionListener(this::clientesComboBoxActionPerformed);
 
         jLabel1.setText("Clientes");
@@ -59,7 +61,7 @@ public class CadastroClientes extends javax.swing.JFrame {
         jLabel5.setText("Endereço");
 
         try {
-            cnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -103,7 +105,7 @@ public class CadastroClientes extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(email, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(telefone, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cnpj)
+                            .addComponent(cpf)
                             .addComponent(endereco)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,13 +130,13 @@ public class CadastroClientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(clientesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -177,12 +179,45 @@ public class CadastroClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        Cliente cliente;
         
+        cliente = novo ? new Cliente() : (Cliente) clientesComboBox.getSelectedItem();
+        
+        cliente.setNome(nome.getText());
+        cliente.setCpf(cpf.getText());
+        cliente.setEmail(email.getText());
+        cliente.setEndereco(endereco.getText());
+        cliente.setTelefone(telefone.getText());
+        
+        if (novo) {
+            clientesComboBox.addItem(cliente);
+            clientes.add(cliente);
+        }
+        
+        btNovo.setEnabled(true);
     }//GEN-LAST:event_btSalvarActionPerformed
 
     private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomeActionPerformed
+
+    private void clientesComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_clientesComboBoxItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            Cliente cliente = (Cliente) clientesComboBox
+                    .getSelectedItem();
+            
+            nome.setText(cliente.getNome());
+            cpf.setText(cliente.getCpf());
+            telefone.setText(cliente.getTelefone());
+            email.setText(cliente.getEmail());
+            endereco.setText(cliente.getEndereco());
+            
+            btSalvar.setEnabled(true);
+            btNovo.setEnabled(true);
+            
+            novo = false;
+       }
+    }//GEN-LAST:event_clientesComboBoxItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -212,8 +247,8 @@ public class CadastroClientes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btNovo;
     private javax.swing.JButton btSalvar;
-    private javax.swing.JComboBox<String> clientesComboBox;
-    private javax.swing.JFormattedTextField cnpj;
+    private javax.swing.JComboBox clientesComboBox;
+    private javax.swing.JFormattedTextField cpf;
     private javax.swing.JTextField email;
     private javax.swing.JTextField endereco;
     private javax.swing.JLabel jLabel1;
