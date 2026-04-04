@@ -46,6 +46,7 @@ public class Principal extends javax.swing.JFrame {
         preco = new javax.swing.JTextField();
         btSalvar = new javax.swing.JButton();
         btNovo = new javax.swing.JButton();
+        btCadastroClientes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,6 +70,9 @@ public class Principal extends javax.swing.JFrame {
 
         btNovo.setText("Novo");
         btNovo.addActionListener(this::btNovoActionPerformed);
+
+        btCadastroClientes.setText("Cadastro de Clientes");
+        btCadastroClientes.addActionListener(this::btCadastroClientesActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,15 +103,19 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(preco))))
                 .addGap(72, 72, 72))
             .addGroup(layout.createSequentialGroup()
-                .addGap(103, 103, 103)
+                .addContainerGap()
                 .addComponent(btCadastroFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btCadastroClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btCadastroFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btCadastroFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCadastroClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -187,6 +195,10 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btCadastroFornecedorActionPerformed
 
+    private void btCadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroClientesActionPerformed
+        new CadastroClientes().setVisible(true);
+    }//GEN-LAST:event_btCadastroClientesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -213,6 +225,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btCadastroClientes;
     private javax.swing.JButton btCadastroFornecedor;
     private javax.swing.JButton btNovo;
     private javax.swing.JButton btSalvar;
