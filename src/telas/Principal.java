@@ -49,7 +49,7 @@ public class Principal extends javax.swing.JFrame {
         btCadastroClientes = new javax.swing.JButton();
         btCadastroUsuarios = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Produto");
 

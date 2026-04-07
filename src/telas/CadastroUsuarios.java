@@ -2,14 +2,12 @@ package telas;
 
 import entidades.Usuario;
 import java.awt.event.ItemEvent;
-import java.util.LinkedList;
 
 /**
  *
  * @author joseelias14
  */
 public class CadastroUsuarios extends javax.swing.JFrame {
-    LinkedList listaUsuarios = new LinkedList();
     private boolean novo;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CadastroUsuarios.class.getName());
@@ -19,6 +17,8 @@ public class CadastroUsuarios extends javax.swing.JFrame {
      */
     public CadastroUsuarios() {
         initComponents();
+        comboUsuarios.setModel(new javax.swing.DefaultComboBoxModel(
+                GerenciadorUsuarios.listaUsuarios.toArray()));
     }
 
     /**
@@ -142,7 +142,7 @@ public class CadastroUsuarios extends javax.swing.JFrame {
 
         if (novo) {
             comboUsuarios.addItem(usuario);
-            listaUsuarios.add(usuario);
+            GerenciadorUsuarios.listaUsuarios.add(usuario);
         }
 
         btNovo.setEnabled(true);
