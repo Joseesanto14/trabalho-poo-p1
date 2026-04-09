@@ -21,13 +21,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form TelaPrincipal
      */
-    public TelaPrincipal() {
+    public TelaPrincipal(ArrayList usuarios) {
         initComponents();
         
         clientes = new ArrayList<>();
         fornecedores = new ArrayList<>();
         produtos = new ArrayList<>();
-        usuarios = new ArrayList<>();
+        this.usuarios = usuarios;
     }
 
     /**
@@ -123,7 +123,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TelaPrincipal().setVisible(true));
+        //java.awt.EventQueue.invokeLater(() -> new TelaPrincipal().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

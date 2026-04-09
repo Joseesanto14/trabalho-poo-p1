@@ -25,6 +25,14 @@ public class TelaLogin extends javax.swing.JFrame {
         
         mensagemErro.setVisible(false);
     }
+    
+    public TelaLogin(ArrayList<Usuario> usuarios) {
+        initComponents();
+        
+        this.usuarios = usuarios;
+        
+        mensagemErro.setVisible(false);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -127,7 +135,7 @@ public class TelaLogin extends javax.swing.JFrame {
             }
             
             if (userExiste && Arrays.equals(user.getSenha(), senha)) {
-                new TelaPrincipal().setVisible(true);
+                new TelaPrincipal(usuarios).setVisible(true);
                 this.dispose();
             }
         }
