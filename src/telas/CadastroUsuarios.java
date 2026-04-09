@@ -2,6 +2,7 @@ package telas;
 
 import entidades.Usuario;
 import java.awt.event.ItemEvent;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 /**
@@ -136,7 +137,7 @@ public class CadastroUsuarios extends javax.swing.JFrame {
         .getSelectedItem();
 
         usuario.setUsername(username.getText());
-        usuario.setSenha(senha.getText());
+        usuario.setSenha(senha.getText().toCharArray());
         usuario.setEmail(email.getText());
         usuario.setNivel(nivel.getText());
 
@@ -154,7 +155,7 @@ public class CadastroUsuarios extends javax.swing.JFrame {
                     .getSelectedItem();
             
             username.setText(usuario.getUsername());
-            senha.setText(usuario.getSenha());
+            senha.setText(Arrays.toString(usuario.getSenha()));
             email.setText(usuario.getEmail());
             nivel.setText(usuario.getNivel());
             

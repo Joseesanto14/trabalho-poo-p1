@@ -1,10 +1,16 @@
 package telas;
 
+import entidades.Usuario;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  *
  * @author joseelias14
  */
 public class TelaLogin extends javax.swing.JFrame {
+    private ArrayList<Usuario> usuarios;
+    private ArrayList<String> nomesUsuarios;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaLogin.class.getName());
 
@@ -13,6 +19,11 @@ public class TelaLogin extends javax.swing.JFrame {
      */
     public TelaLogin() {
         initComponents();
+        
+        usuarios = new ArrayList<>();
+        usuarios.add(new Usuario("admin", "admin@email.com", "admin123".toCharArray(), "admin"));
+        
+        mensagemErro.setVisible(false);
     }
 
     /**
@@ -30,6 +41,7 @@ public class TelaLogin extends javax.swing.JFrame {
         editUsername = new javax.swing.JTextField();
         editSenha = new javax.swing.JPasswordField();
         btLogin = new javax.swing.JButton();
+        mensagemErro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,6 +58,10 @@ public class TelaLogin extends javax.swing.JFrame {
         btLogin.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
         btLogin.setText("Login");
         btLogin.addActionListener(this::btLoginActionPerformed);
+
+        mensagemErro.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        mensagemErro.setForeground(new java.awt.Color(255, 0, 0));
+        mensagemErro.setText("Mensagem");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,7 +84,10 @@ public class TelaLogin extends javax.swing.JFrame {
                                 .addComponent(editSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(btLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(btLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(163, 163, 163)
+                        .addComponent(mensagemErro)))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -86,7 +105,9 @@ public class TelaLogin extends javax.swing.JFrame {
                     .addComponent(editSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addComponent(btLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(mensagemErro)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -95,17 +116,24 @@ public class TelaLogin extends javax.swing.JFrame {
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
         String nome = editUsername.getText();
         char[] senha = editSenha.getPassword();
+        boolean userExiste = false;
         
-        if (!nome.equals("admin")) {
-            return;
+        for (Usuario user: usuarios) {
+            if (!userExiste) {
+                
+                if (user.getUsername().equals(nome)) {
+                    userExiste = true;
+                }
+            }
+            
+            if (userExiste && Arrays.equals(user.getSenha(), senha)) {
+                new TelaPrincipal().setVisible(true);
+                this.dispose();
+            }
         }
         
-        if (senha.equals("admin123")) {
-            return;
-        }
-        
-        new TelaPrincipal().setVisible(true);
-        this.dispose();
+        mensagemErro.setVisible(true);
+        mensagemErro.setText("Errou, boboca!");
     }//GEN-LAST:event_btLoginActionPerformed
 
     /**
@@ -140,5 +168,6 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel mensagemErro;
     // End of variables declaration//GEN-END:variables
 }
