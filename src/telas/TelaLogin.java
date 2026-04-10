@@ -124,17 +124,9 @@ public class TelaLogin extends javax.swing.JFrame {
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
         String nome = editUsername.getText();
         char[] senha = editSenha.getPassword();
-        boolean userExiste = false;
         
         for (Usuario user: usuarios) {
-            if (!userExiste) {
-                
-                if (user.getUsername().equals(nome)) {
-                    userExiste = true;
-                }
-            }
-            
-            if (userExiste && Arrays.equals(user.getSenha(), senha)) {
+            if (user.getUsername().equals(nome) && Arrays.equals(user.getSenha(), senha)) {
                 new TelaPrincipal(usuarios).setVisible(true);
                 this.dispose();
             }
