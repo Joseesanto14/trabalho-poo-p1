@@ -35,6 +35,6 @@ public class Fornecedor {
 
     @Override
     public String toString() {
-        return nome + " - " + cnpj;
+        return nome + " - " + cnpj + " - " + telefone;
     }
 }

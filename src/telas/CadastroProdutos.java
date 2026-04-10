@@ -3,15 +3,20 @@ package telas;
 import entidades.Fornecedor;
 import entidades.Produto;
 import java.awt.event.ItemEvent;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 /**
  *
  * @author joseelias14
  */
-public class CadastroProdutos extends javax.swing.JFrame {
+public class CadastroProdutos extends JDialog {
     
-    private LinkedList<Fornecedor> listaFornecedor = new LinkedList<>();
+    private ArrayList<Produto> listaProdutos;
+    private ArrayList<Fornecedor> listaFornecedores;
     private boolean novo = false;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CadastroProdutos.class.getName());
@@ -19,10 +24,22 @@ public class CadastroProdutos extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    public CadastroProdutos() {
+    public CadastroProdutos(JFrame mae, ArrayList listaProdutos, ArrayList listaFornecedores, boolean modal) {
+    
+        super(mae, "Cadastro de Produtos", modal);
         initComponents();
+        this.listaProdutos = listaProdutos;
+        this.listaFornecedores = listaFornecedores;
+        comboProduto.setModel(new DefaultComboBoxModel(listaProdutos.toArray()));
+        comboFornecedor.setModel(new DefaultComboBoxModel(listaFornecedores.toArray()));
+        
+        if (!listaProdutos.isEmpty()) {
+            comboProdutoItemStateChanged(new ItemEvent(new JComboBox(
+                    new DefaultComboBoxModel(listaProdutos.toArray())), 701, 
+                    (Produto) comboProduto.getSelectedItem(), ItemEvent.SELECTED));
+        }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,8 +61,10 @@ public class CadastroProdutos extends javax.swing.JFrame {
         preco = new javax.swing.JTextField();
         btSalvar = new javax.swing.JButton();
         btNovo = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        btVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Produto");
 
@@ -65,12 +84,26 @@ public class CadastroProdutos extends javax.swing.JFrame {
         btNovo.setText("Novo");
         btNovo.addActionListener(this::btNovoActionPerformed);
 
+        jLabel6.setFont(new java.awt.Font("Noto Sans", 1, 36)); // NOI18N
+        jLabel6.setText("CADASTRO DE PRODUTOS");
+
+        btVoltar.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        btVoltar.setText("Voltar");
+        btVoltar.addActionListener(this::btVoltarActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btVoltar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel6))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,14 +123,18 @@ public class CadastroProdutos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(94, 94, 94)
                         .addComponent(btNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE)
                         .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(72, 72, 72))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addContainerGap()
+                .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -124,7 +161,7 @@ public class CadastroProdutos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -137,6 +174,7 @@ public class CadastroProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        Produto produto;
         if (descricao.getText().trim().isEmpty()
                 || preco.getText().trim().isEmpty()
                 || quantidade.getText().trim().isEmpty()) {
@@ -159,8 +197,6 @@ public class CadastroProdutos extends javax.swing.JFrame {
                     javax.swing.JOptionPane.WARNING_MESSAGE);
             return;
         }
-
-        Produto produto = null;
         
         produto = novo ? new Produto() : (Produto) comboProduto.getSelectedItem();
         
@@ -172,6 +208,7 @@ public class CadastroProdutos extends javax.swing.JFrame {
         if (novo) {
             comboProduto.addItem(produto);
             comboProduto.setSelectedItem(produto);
+            listaProdutos.add(produto);
         }
         
         btNovo.setEnabled(true);
@@ -192,6 +229,10 @@ public class CadastroProdutos extends javax.swing.JFrame {
             novo = false;
         }
     }//GEN-LAST:event_comboProdutoItemStateChanged
+
+    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,12 +256,13 @@ public class CadastroProdutos extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new CadastroProdutos().setVisible(true));
+        //java.awt.EventQueue.invokeLater(() -> new CadastroProdutos().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btNovo;
     private javax.swing.JButton btSalvar;
+    private javax.swing.JButton btVoltar;
     private javax.swing.JComboBox comboFornecedor;
     private javax.swing.JComboBox<Produto> comboProduto;
     private javax.swing.JTextField descricao;
@@ -229,6 +271,7 @@ public class CadastroProdutos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField preco;
     private javax.swing.JTextField quantidade;
     // End of variables declaration//GEN-END:variables

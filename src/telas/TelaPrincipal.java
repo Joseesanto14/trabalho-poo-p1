@@ -54,6 +54,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btFornecedores.addActionListener(this::btFornecedoresActionPerformed);
 
         btProdutos.setText("Cadastro de Produtos");
+        btProdutos.addActionListener(this::btProdutosActionPerformed);
 
         btUsuarios.setText("Cadastro de Usuários");
 
@@ -111,6 +112,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void btFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFornecedoresActionPerformed
         new CadastroFornecedores(this, fornecedores, true).setVisible(true);
     }//GEN-LAST:event_btFornecedoresActionPerformed
+
+    private void btProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProdutosActionPerformed
+        new CadastroProdutos(this, produtos, fornecedores ,true).setVisible(true);
+    }//GEN-LAST:event_btProdutosActionPerformed
 
     /**
      * @param args the command line arguments

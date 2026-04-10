@@ -22,13 +22,12 @@ public class CadastroFornecedores extends JDialog {
      * Creates new form CadastroFornecedores
      */
     public CadastroFornecedores(JFrame parent, ArrayList listaFornecedores, boolean modal) {
-        super(parent, "Cadastrar Fornecedor", modal);
+        super(parent, "Cadastro de Fornecedores", modal);
         initComponents();
         this.listaFornecedores = listaFornecedores;
         comboFornecedor.setModel(new DefaultComboBoxModel(
                 listaFornecedores.toArray()));
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        
         
         if (!listaFornecedores.isEmpty()) {
             comboFornecedorItemStateChanged(new ItemEvent(new JComboBox(new DefaultComboBoxModel(
@@ -191,6 +190,7 @@ public class CadastroFornecedores extends JDialog {
         
         if (novo) {
             comboFornecedor.addItem(fornecedor);
+            comboFornecedor.setSelectedItem(fornecedor);
             listaFornecedores.add(fornecedor);
         }
         
