@@ -201,12 +201,6 @@ public class CadastroFornecedores extends JDialog {
             
             novo = false;
             
-            System.out.println(evt.getItemSelectable());
-            System.out.println(evt.getID());
-            System.out.println(evt.getItem());
-            System.out.println(evt.getStateChange());
-            
-            
        }
     }//GEN-LAST:event_comboFornecedorItemStateChanged
 
