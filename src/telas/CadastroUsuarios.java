@@ -131,6 +131,17 @@ public class CadastroUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        if (username.getText().trim().isEmpty()
+                || email.getText().trim().isEmpty()
+                || senha.getText().trim().isEmpty()
+                || nivel.getText().trim().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Preencha todos os campos!",
+                    "Aviso",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         Usuario usuario = null;
 
         usuario = novo ? new Usuario() : (Usuario) comboUsuarios

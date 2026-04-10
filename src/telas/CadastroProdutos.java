@@ -137,6 +137,16 @@ public class CadastroProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        if (descricao.getText().trim().isEmpty()
+                || preco.getText().trim().isEmpty()
+                || quantidade.getText().trim().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Preencha todos os campos!",
+                    "Aviso",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         Produto produto = null;
         
         produto = novo ? new Produto() : (Produto) comboProduto.getSelectedItem();
