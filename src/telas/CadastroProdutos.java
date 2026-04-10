@@ -147,13 +147,26 @@ public class CadastroProdutos extends javax.swing.JFrame {
             return;
         }
 
+        double precoValor;
+        int quantidadeValor;
+        try {
+            precoValor = Double.parseDouble(preco.getText().trim());
+            quantidadeValor = Integer.parseInt(quantidade.getText().trim());
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Preço e quantidade devem ser valores numéricos!",
+                    "Aviso",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         Produto produto = null;
         
         produto = novo ? new Produto() : (Produto) comboProduto.getSelectedItem();
         
         produto.setDescricao(descricao.getText());
-        produto.setPreco(Double.parseDouble(preco.getText()));
-        produto.setQuantidade(Integer.valueOf(quantidade.getText()));
+        produto.setPreco(precoValor);
+        produto.setQuantidade(quantidadeValor);
         produto.setFornecedor( (Fornecedor) comboFornecedor.getSelectedItem());
         
         if (novo) {
