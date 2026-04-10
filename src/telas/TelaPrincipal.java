@@ -48,8 +48,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btClientes.setText("Cadastro de Clientes");
+        btClientes.addActionListener(this::btClientesActionPerformed);
 
         btFornecedores.setText("Cadastro de Fornecedores");
+        btFornecedores.addActionListener(this::btFornecedoresActionPerformed);
 
         btProdutos.setText("Cadastro de Produtos");
 
@@ -97,9 +99,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
-        new TelaLogin().setVisible(true);
+        new TelaLogin(usuarios).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btVoltarActionPerformed
+
+    private void btClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClientesActionPerformed
+        this.setVisible(false);
+        new CadastroClientes().setVisible(true);
+    }//GEN-LAST:event_btClientesActionPerformed
+
+    private void btFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFornecedoresActionPerformed
+        new CadastroFornecedores(this, fornecedores, true).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btFornecedoresActionPerformed
 
     /**
      * @param args the command line arguments
