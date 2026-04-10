@@ -169,6 +169,16 @@ public class CadastroFornecedores extends JDialog {
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        if (nome.getText().trim().isEmpty()
+                || cnpj.getText().replaceAll("[^0-9]", "").isEmpty()
+                || telefone.getText().replaceAll("[^0-9]", "").isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Preencha todos os campos!",
+                    "Aviso",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         Fornecedor fornecedor;
         
         fornecedor = novo ? new Fornecedor() : (Fornecedor) comboFornecedor

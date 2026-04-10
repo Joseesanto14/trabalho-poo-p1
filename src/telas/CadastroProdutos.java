@@ -175,12 +175,34 @@ public class CadastroProdutos extends JDialog {
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         Produto produto;
+        if (descricao.getText().trim().isEmpty()
+                || preco.getText().trim().isEmpty()
+                || quantidade.getText().trim().isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Preencha todos os campos!",
+                    "Aviso",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        double precoValor;
+        int quantidadeValor;
+        try {
+            precoValor = Double.parseDouble(preco.getText().trim());
+            quantidadeValor = Integer.parseInt(quantidade.getText().trim());
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Preço e quantidade devem ser valores numéricos!",
+                    "Aviso",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
         produto = novo ? new Produto() : (Produto) comboProduto.getSelectedItem();
         
         produto.setDescricao(descricao.getText());
-        produto.setPreco(Double.parseDouble(preco.getText()));
-        produto.setQuantidade(Integer.valueOf(quantidade.getText()));
+        produto.setPreco(precoValor);
+        produto.setQuantidade(quantidadeValor);
         produto.setFornecedor( (Fornecedor) comboFornecedor.getSelectedItem());
         
         if (novo) {
