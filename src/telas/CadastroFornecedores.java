@@ -3,8 +3,8 @@ package telas;
 import entidades.Fornecedor;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -13,8 +13,6 @@ import javax.swing.JFrame;
  * @author joseelias14
  */
 public class CadastroFornecedores extends JDialog {
-    //mudar pra JDialog
-    //setar um modal como true
     private ArrayList listaFornecedores;
     private boolean novo = false;
 
@@ -31,6 +29,12 @@ public class CadastroFornecedores extends JDialog {
                 listaFornecedores.toArray()));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        
+        if (!listaFornecedores.isEmpty()) {
+            comboFornecedorItemStateChanged(new ItemEvent(new JComboBox(new DefaultComboBoxModel(
+                listaFornecedores.toArray())), 701, (Fornecedor) comboFornecedor.getSelectedItem(), ItemEvent.SELECTED));
+        }
+        
     }
 
     /**
@@ -166,7 +170,7 @@ public class CadastroFornecedores extends JDialog {
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        Fornecedor fornecedor = null;
+        Fornecedor fornecedor;
         
         fornecedor = novo ? new Fornecedor() : (Fornecedor) comboFornecedor
                 .getSelectedItem();
@@ -196,11 +200,17 @@ public class CadastroFornecedores extends JDialog {
             btNovo.setEnabled(true);
             
             novo = false;
+            
+            System.out.println(evt.getItemSelectable());
+            System.out.println(evt.getID());
+            System.out.println(evt.getItem());
+            System.out.println(evt.getStateChange());
+            
+            
        }
     }//GEN-LAST:event_comboFornecedorItemStateChanged
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
-        
         this.dispose();
     }//GEN-LAST:event_btVoltarActionPerformed
     

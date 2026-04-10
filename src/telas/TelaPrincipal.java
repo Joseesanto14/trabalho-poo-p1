@@ -110,7 +110,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFornecedoresActionPerformed
         new CadastroFornecedores(this, fornecedores, true).setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btFornecedoresActionPerformed
 
     /**
