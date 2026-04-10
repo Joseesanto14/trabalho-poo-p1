@@ -1,6 +1,6 @@
 package projeto;
 
-import telas.Principal;
+import telas.TelaLogin;
 
 /**
  *
@@ -9,7 +9,7 @@ import telas.Principal;
 public class Projeto {
     
     public static void main(String[] args) {
-        new Principal().setVisible(true);
+        new TelaLogin().setVisible(true);
     }
     
 }

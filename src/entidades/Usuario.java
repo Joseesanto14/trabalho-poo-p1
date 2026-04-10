@@ -7,9 +7,18 @@ package entidades;
 public class Usuario {
     private String username;
     private String email;
-    private String senha;
+    private char[] senha;
     private String nivel;
+    
+    public Usuario() {}
 
+    public Usuario(String username, String email, char[] senha, String nivel) {
+        this.username = username;
+        this.email = email;
+        this.senha = senha;
+        this.nivel = nivel;
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -26,11 +35,11 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getSenha() {
+    public char[] getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setSenha(char[] senha) {
         this.senha = senha;
     }
 

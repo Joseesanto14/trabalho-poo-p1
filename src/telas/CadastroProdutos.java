@@ -4,23 +4,22 @@ import entidades.Fornecedor;
 import entidades.Produto;
 import java.awt.event.ItemEvent;
 import java.util.LinkedList;
-import javax.swing.DefaultComboBoxModel;
 
 /**
  *
  * @author joseelias14
  */
-public class Principal extends javax.swing.JFrame {
+public class CadastroProdutos extends javax.swing.JFrame {
     
     private LinkedList<Fornecedor> listaFornecedor = new LinkedList<>();
     private boolean novo = false;
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Principal.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CadastroProdutos.class.getName());
 
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public CadastroProdutos() {
         initComponents();
     }
 
@@ -35,7 +34,6 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         comboProduto = new javax.swing.JComboBox<>();
-        btCadastroFornecedor = new javax.swing.JButton();
         descricao = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -46,17 +44,12 @@ public class Principal extends javax.swing.JFrame {
         preco = new javax.swing.JTextField();
         btSalvar = new javax.swing.JButton();
         btNovo = new javax.swing.JButton();
-        btCadastroClientes = new javax.swing.JButton();
-        btCadastroUsuarios = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Produto");
 
         comboProduto.addItemListener(this::comboProdutoItemStateChanged);
-
-        btCadastroFornecedor.setText("Cadastro de Fornecedor");
-        btCadastroFornecedor.addActionListener(this::btCadastroFornecedorActionPerformed);
 
         jLabel2.setText("Descrição");
 
@@ -71,12 +64,6 @@ public class Principal extends javax.swing.JFrame {
 
         btNovo.setText("Novo");
         btNovo.addActionListener(this::btNovoActionPerformed);
-
-        btCadastroClientes.setText("Cadastro de Clientes");
-        btCadastroClientes.addActionListener(this::btCadastroClientesActionPerformed);
-
-        btCadastroUsuarios.setText("Cadastro de Usuários");
-        btCadastroUsuarios.addActionListener(this::btCadastroUsuariosActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,27 +90,14 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(94, 94, 94)
                         .addComponent(btNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
                         .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(72, 72, 72))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btCadastroFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btCadastroClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btCadastroUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btCadastroFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btCadastroClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btCadastroUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -196,20 +170,6 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_comboProdutoItemStateChanged
 
-    private void btCadastroFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroFornecedorActionPerformed
-        new CadastroFornecedores(this, listaFornecedor, true).setVisible(true);
-        comboFornecedor.setModel(new DefaultComboBoxModel(listaFornecedor.toArray()));
-        
-    }//GEN-LAST:event_btCadastroFornecedorActionPerformed
-
-    private void btCadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroClientesActionPerformed
-        new CadastroClientes().setVisible(true);
-    }//GEN-LAST:event_btCadastroClientesActionPerformed
-
-    private void btCadastroUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroUsuariosActionPerformed
-        new CadastroUsuarios().setVisible(true);
-    }//GEN-LAST:event_btCadastroUsuariosActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -232,13 +192,10 @@ public class Principal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Principal().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new CadastroProdutos().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btCadastroClientes;
-    private javax.swing.JButton btCadastroFornecedor;
-    private javax.swing.JButton btCadastroUsuarios;
     private javax.swing.JButton btNovo;
     private javax.swing.JButton btSalvar;
     private javax.swing.JComboBox comboFornecedor;

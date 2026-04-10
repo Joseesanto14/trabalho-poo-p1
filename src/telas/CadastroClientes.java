@@ -241,7 +241,7 @@ public class CadastroClientes extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new CadastroClientes().setVisible(true));
+        //java.awt.EventQueue.invokeLater(() -> new CadastroClientes().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

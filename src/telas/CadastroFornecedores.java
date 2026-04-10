@@ -2,8 +2,9 @@ package telas;
 
 import entidades.Fornecedor;
 import java.awt.event.ItemEvent;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -12,9 +13,7 @@ import javax.swing.JFrame;
  * @author joseelias14
  */
 public class CadastroFornecedores extends JDialog {
-    //mudar pra JDialog
-    //setar um modal como true
-    private LinkedList listaFornecedores;
+    private ArrayList listaFornecedores;
     private boolean novo = false;
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CadastroFornecedores.class.getName());
@@ -22,7 +21,7 @@ public class CadastroFornecedores extends JDialog {
     /**
      * Creates new form CadastroFornecedores
      */
-    public CadastroFornecedores(JFrame parent, LinkedList listaFornecedores, boolean modal) {
+    public CadastroFornecedores(JFrame parent, ArrayList listaFornecedores, boolean modal) {
         super(parent, "Cadastrar Fornecedor", modal);
         initComponents();
         this.listaFornecedores = listaFornecedores;
@@ -30,6 +29,12 @@ public class CadastroFornecedores extends JDialog {
                 listaFornecedores.toArray()));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        
+        if (!listaFornecedores.isEmpty()) {
+            comboFornecedorItemStateChanged(new ItemEvent(new JComboBox(new DefaultComboBoxModel(
+                listaFornecedores.toArray())), 701, (Fornecedor) comboFornecedor.getSelectedItem(), ItemEvent.SELECTED));
+        }
+        
     }
 
     /**
@@ -51,6 +56,8 @@ public class CadastroFornecedores extends JDialog {
         telefone = new javax.swing.JFormattedTextField();
         btSalvar = new javax.swing.JButton();
         btNovo = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        btVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -82,18 +89,26 @@ public class CadastroFornecedores extends JDialog {
         btNovo.setText("Novo");
         btNovo.addActionListener(this::btNovoActionPerformed);
 
+        jLabel5.setFont(new java.awt.Font("Noto Sans", 1, 36)); // NOI18N
+        jLabel5.setText("CADASTRO DE FORNECEDORES");
+
+        btVoltar.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        btVoltar.setText("Voltar");
+        btVoltar.addActionListener(this::btVoltarActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addContainerGap()
+                .addComponent(btVoltar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
@@ -101,16 +116,28 @@ public class CadastroFornecedores extends JDialog {
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(telefone)
-                            .addComponent(cnpj)
                             .addComponent(nome)
-                            .addComponent(comboFornecedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(120, Short.MAX_VALUE))
+                            .addComponent(comboFornecedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(telefone)
+                            .addComponent(cnpj, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(157, 157, 157))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(0, 40, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addContainerGap()
+                .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(comboFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -126,11 +153,11 @@ public class CadastroFornecedores extends JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,7 +170,7 @@ public class CadastroFornecedores extends JDialog {
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        Fornecedor fornecedor = null;
+        Fornecedor fornecedor;
         
         fornecedor = novo ? new Fornecedor() : (Fornecedor) comboFornecedor
                 .getSelectedItem();
@@ -173,8 +200,13 @@ public class CadastroFornecedores extends JDialog {
             btNovo.setEnabled(true);
             
             novo = false;
+            
        }
     }//GEN-LAST:event_comboFornecedorItemStateChanged
+
+    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btVoltarActionPerformed
     
     
     /**
@@ -205,12 +237,14 @@ public class CadastroFornecedores extends JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btNovo;
     private javax.swing.JButton btSalvar;
+    private javax.swing.JButton btVoltar;
     private javax.swing.JFormattedTextField cnpj;
     private javax.swing.JComboBox comboFornecedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField nome;
     private javax.swing.JFormattedTextField telefone;
     // End of variables declaration//GEN-END:variables
