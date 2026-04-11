@@ -1,5 +1,6 @@
 package telas;
 
+import entidades.NivelAcesso;
 import entidades.Usuario;
 import java.awt.event.ItemEvent;
 import java.util.Arrays;
@@ -147,10 +148,21 @@ public class CadastroUsuarios extends javax.swing.JFrame {
         usuario = novo ? new Usuario() : (Usuario) comboUsuarios
         .getSelectedItem();
 
+        NivelAcesso nivelAcesso;
+        try {
+            nivelAcesso = NivelAcesso.valueOf(nivel.getText().trim().toUpperCase());
+        } catch (IllegalArgumentException e) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Nível inválido! Use: USUARIO ou ADMIN",
+                    "Aviso",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         usuario.setUsername(username.getText());
         usuario.setSenha(senha.getText().toCharArray());
         usuario.setEmail(email.getText());
-        usuario.setNivel(nivel.getText());
+        usuario.setNivel(nivelAcesso);
 
         if (novo) {
             comboUsuarios.addItem(usuario);
@@ -168,7 +180,7 @@ public class CadastroUsuarios extends javax.swing.JFrame {
             username.setText(usuario.getUsername());
             senha.setText(Arrays.toString(usuario.getSenha()));
             email.setText(usuario.getEmail());
-            nivel.setText(usuario.getNivel());
+            nivel.setText(usuario.getNivel().name());
             
             btSalvar.setEnabled(true);
             btNovo.setEnabled(true);

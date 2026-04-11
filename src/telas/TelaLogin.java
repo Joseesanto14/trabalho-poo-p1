@@ -1,5 +1,6 @@
 package telas;
 
+import entidades.NivelAcesso;
 import entidades.Usuario;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +22,7 @@ public class TelaLogin extends javax.swing.JFrame {
         initComponents();
         
         usuarios = new ArrayList<>();
-        usuarios.add(new Usuario("admin", "admin@email.com", "admin123".toCharArray(), "admin"));
+        usuarios.add(new Usuario("admin", "admin@email.com", "admin123".toCharArray(), NivelAcesso.ADMIN));
         
         mensagemErro.setVisible(false);
     }
