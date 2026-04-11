@@ -44,7 +44,7 @@ public class Produto {
 
     @Override
     public String toString() {
-        return descricao;
+        return descricao + " | R$ " + preco + " | " + fornecedor.getNome();
     }
     
 }
