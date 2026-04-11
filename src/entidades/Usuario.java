@@ -8,11 +8,11 @@ public class Usuario {
     private String username;
     private String email;
     private char[] senha;
-    private String nivel;
+    private NivelAcesso nivel;
     
     public Usuario() {}
 
-    public Usuario(String username, String email, char[] senha, String nivel) {
+    public Usuario(String username, String email, char[] senha, NivelAcesso nivel) {
         this.username = username;
         this.email = email;
         this.senha = senha;
@@ -43,11 +43,11 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public String getNivel() {
+    public NivelAcesso getNivel() {
         return nivel;
     }
 
-    public void setNivel(String nivel) {
+    public void setNivel(NivelAcesso nivel) {
         this.nivel = nivel;
     }
 
